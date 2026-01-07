@@ -37,7 +37,7 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
  * @param {number} target
  * @return {number[]}
  */
-const twoSum = function(nums, target) {
+const twoSum1 = function(nums, target) {
     for (let indexX = 0; indexX < nums.length; indexX++) {
             for (let indexY = indexX+1; indexY < nums.length; indexY++) {
                 const isCorrect = nums[indexX] + nums[indexY] === target
@@ -47,6 +47,27 @@ const twoSum = function(nums, target) {
 
 };
 
-/* Time complexity is O(n2) since for every element in the array I have to search accross the remaining elements every single time */
+/* Time complexity is quadratic O(n2) since for every element in the array I have to search accross the remaining elements every single time */
 
-console.log(twoSum([1,2,3,4], 4))
+console.log(twoSum1([1,2,3,4], 4))
+
+/* Optimized solution */
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+const twoSum2 = function(nums, target) {
+    const seen = {}
+    for (let indexX = 0; indexX < nums.length; indexX++) {
+        const current = nums[indexX]
+        const counterPart = target - current
+        if(seen[counterPart] !== undefined){
+            return [seen[counterPart], indexX]
+        }
+        seen[current] = indexX
+    }
+};
+/*Time complexity is Linear O(n) since for each element of the array we will have to check it only once*/
+console.log(twoSum2([1,4,3,7,3,6], 8))
