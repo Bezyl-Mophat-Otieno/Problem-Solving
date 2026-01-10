@@ -39,28 +39,40 @@
  * @param {string} 
  * @return {number}
  */
-const lengthOfLongestSubstring = function(s) {
+const lengthOfLongestSubstring1 = function(s) {
     if(!s) return 0
     const fullArray = [...s]
     const arrayOfArrays = []
-    let subArray = new Set()
     for(let i = 0; i<fullArray.length;  i++){
+    const subArray = new Set()
     subArray.add(fullArray[i])
         for(let j = i+1; j<fullArray.length;  j++){
             if(subArray.has(fullArray[j])){
-                arrayOfArrays.push(subArray)
-                subArray = new Set()
                 break;
             }else {
                 subArray.add(fullArray[j])
             }
         }
+     if(subArray.size) arrayOfArrays.push(subArray)
     }
-    if(subArray.size) arrayOfArrays.push(subArray)
     return Math.max(...arrayOfArrays.map(subArray => ([...subArray]).length))
     
 };
 
 // Time complexity for this solution is 0(n2) (Quadratic) since for each element we loop through the elements over and over again.
+console.log(lengthOfLongestSubstring1("abcabcbb"))
 
-console.log(lengthOfLongestSubstring("dvdf"))
+// Optimized solution to atleast 0(n) (Linear)
+// First we need to ask ourselves what are we rechecking ?
+// Can we laverage storage to avoid repetition ?
+// If so what exactly can we store to avoid recchecking ?
+
+
+/**
+ * @param {string} 
+ * @return {number}
+ */
+const lengthOfLongestSubstring2 = function(s) {
+    if(!s) return 0;
+};
+
