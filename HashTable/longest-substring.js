@@ -40,20 +40,25 @@
  * @return {number}
  */
 const lengthOfLongestSubstring = function(s) {
+    if(!s) return 0
     const fullArray = [...s]
     const arrayOfArrays = []
-    let subArray = []
+    let subArray = new Set()
     fullArray.forEach((el)=>{
-        if(subArray.includes(el)){
+        if(subArray.has(el)){
             arrayOfArrays.push(subArray)
-            subArray = []
+            subArray = new Set()
+            subArray.add(el)
+     
         } else {
-            subArray.push(el)
+            subArray.add(el)
         }
+
     })
-    return Math.max(...arrayOfArrays.map(subArray => subArray.length))
+    if(subArray.size) arrayOfArrays.push(subArray)
+    return Math.max(...arrayOfArrays.map(subArray => ([...subArray]).length))
     
 };
 
 
-console.log(lengthOfLongestSubstring("abcabcbb"))
+console.log(lengthOfLongestSubstring("dvdf"))
