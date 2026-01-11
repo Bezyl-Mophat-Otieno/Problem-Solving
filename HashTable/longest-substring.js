@@ -73,6 +73,23 @@ console.log(lengthOfLongestSubstring1("abcabcbb"))
  * @return {number}
  */
 const lengthOfLongestSubstring2 = function(s) {
-    if(!s) return 0;
+if(!s) return 0;
+const seen = {}
+let start = 0;
+let maxLength = 0
+const stringArray = [...s]
+for(let i = 0; i<stringArray.length; i++){
+    let char = stringArray[i]
+    if(seen[char] != undefined){
+        start = Math.max(start, seen[char] + 1)
+    }
+    seen[char] = i
+    maxLength = Math.max(maxLength, (i-start) + 1)
+}
+  return maxLength
 };
+
+console.log(lengthOfLongestSubstring2("abcabcbb"))
+
+
 
