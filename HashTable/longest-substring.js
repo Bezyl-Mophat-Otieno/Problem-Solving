@@ -60,7 +60,7 @@ const lengthOfLongestSubstring1 = function(s) {
 };
 
 // Time complexity for this solution is 0(n2) (Quadratic) since for each element we loop through the elements over and over again.
-console.log(lengthOfLongestSubstring1("abcabcbb"))
+console.log(lengthOfLongestSubstring1(" "))
 
 // Optimized solution to atleast 0(n) (Linear)
 // First we need to ask ourselves what are we rechecking ?
@@ -73,23 +73,50 @@ console.log(lengthOfLongestSubstring1("abcabcbb"))
  * @return {number}
  */
 const lengthOfLongestSubstring2 = function(s) {
-if(!s) return 0;
-const seen = {}
-let start = 0;
-let maxLength = 0
-const stringArray = [...s]
-for(let i = 0; i<stringArray.length; i++){
-    let char = stringArray[i]
-    if(seen[char] != undefined){
-        start = Math.max(start, seen[char] + 1)
+    if(!s) return 0
+    const seen = {}
+    let start = 0
+    let maxLength = 0
+    const arrayString = [...s]
+
+    for(let i = 0; i<arrayString.length; i++){
+        const char = arrayString[i]
+        if(seen[char]){
+            start = Math.max(start, seen[char]+ 1)
+        }
+        seen[char] = i
+        maxLength = Math.max(maxLength, (i-start) + 1)
     }
-    seen[char] = i
-    maxLength = Math.max(maxLength, (i-start) + 1)
-}
-  return maxLength
+    return maxLength
 };
 
-console.log(lengthOfLongestSubstring2("abcabcbb"))
+console.log(lengthOfLongestSubstring2("abcdefabcd"))
 
 
+/**
+ * @param {string} 
+ * @return {number}
+ */
+const lengthOfLongestSubstring3 = function(s) {
+if(!s) return 0;
+const arrayFromString = [...s]
+let subString = new Set()
+let substrings = []
 
+for(let i = 0; i<arrayFromString.length; i++){
+     subString.add(arrayFromString[i])
+    for(let j = i+1; j<arrayFromString.length; j++){
+        if(subString.has(arrayFromString[j])){
+            substrings.push(subString.size)
+            subString = new Set()
+            break;
+        }
+        subString.add(arrayFromString[j])
+
+    }
+    if(subString.size) substrings.push(subString.size) 
+}
+return Math.max(...substrings)
+};
+
+console.log(lengthOfLongestSubstring3(" "))
