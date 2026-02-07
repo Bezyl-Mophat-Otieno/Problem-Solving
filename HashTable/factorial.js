@@ -23,16 +23,16 @@ function sum(n) {
 function reverseAString1(name){
 if(name.length === 1) return name
 const lastChar = name[name.length - 1]
-return lastChar + reverseAString(name.slice(0,-1))
+return lastChar + reverseAString1(name.slice(0,-1))
 }
 
 
-console.log(reverseAString2("mophat"))
+console.log(reverseAString1("mophat"))
 
-function reverseAString(str) {
+function reverseAString2(str) {
   if (str.length <= 1) return str; // base case
 
-  return reverseString(str.slice(1)) + str[0];
+  return reverseAString2(str.slice(1)) + str[0];
 }
 
-console.log(reverseString("mophat"))
+console.log(reverseAString1("mophat"))
