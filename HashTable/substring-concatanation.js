@@ -55,11 +55,16 @@ console.log("permutation1(5,1)",permutation1(5,1))
 // 1 <= words[i].length <= 30
 // s and words[i] consist of lowercase English letters.
 
-// Steps :
-// 1. permutate the Array
-// 2. Combine the permutated array into substrings
-// 3.Search for the substrings from the string s and get the indexes
-// 4.Return the indexes of the substrings 
+// I will be using the sliding window approach .
+// First the invariant would be A concatenated string is a string that exactly contains all the strings of any permutation of words concatenated.
+// Starting position should be index 0 of the provided string
+// First problem to solve is to permutate the words into various strings combination.
+// Once we have the permutated strings we find the substring from the given string 
+
+
+// Looking at permutation from a sliding window approach.
+// Invariant a substring should contain all the elements of the words array.
+// We should do all possible combinations of the elements of the array
 
 
 /**
@@ -68,7 +73,8 @@ console.log("permutation1(5,1)",permutation1(5,1))
  * @return {number[]}
  */
 var findSubstring = function(s, words) {
+
       
 };
 
-console.log(findSubstring("abcdef", ["a","b","c","d","e", "f"]))
+console.log(findSubstring("barfoothefoobarman", ["foo","bar"]))
