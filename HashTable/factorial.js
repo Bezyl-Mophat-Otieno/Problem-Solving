@@ -20,11 +20,19 @@ function sum(n) {
  * 
  */
 
-function reverseAString(name){
+function reverseAString1(name){
 if(name.length === 1) return name
 const lastChar = name[name.length - 1]
 return lastChar + reverseAString(name.slice(0,-1))
 }
 
 
-console.log(reverseAString("mophat"))
+console.log(reverseAString2("mophat"))
+
+function reverseAString(str) {
+  if (str.length <= 1) return str; // base case
+
+  return reverseString(str.slice(1)) + str[0];
+}
+
+console.log(reverseString("mophat"))
