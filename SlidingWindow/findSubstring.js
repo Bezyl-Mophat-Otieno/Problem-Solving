@@ -63,6 +63,7 @@ const findSubstring = function(s, words) {
     let size = words[0].length
     let windowSize = words.length * size
     let answer = []
+    const sortedWords = words.toSorted((a, b) => a.localeCompare(b)).join(",")
     for(let i = 0; i<s.length; i++){
         let windowState = s.substring(windowStart, i+windowSize)
         if(windowState.length < windowSize) break;
@@ -71,8 +72,8 @@ const findSubstring = function(s, words) {
             newWindowStateArray.push(windowState.substring(j, j+size))
         }
         // validating the window based of the variant
-        let isWindowStateValid = words.toSorted((a, b) => a.localeCompare(b)).join(",") === newWindowStateArray.toSorted((a,b)=> a.localeCompare(b)).join(",")
-        if(isWindowStateValid) {
+        let sortedWindowState =  newWindowStateArray.toSorted((a,b)=> a.localeCompare(b)).join(",")
+        if(sortedWindowState === sortedWords) {
             answer.push(windowStart)
         }
         windowStart++
