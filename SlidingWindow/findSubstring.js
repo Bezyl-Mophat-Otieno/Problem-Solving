@@ -54,28 +54,25 @@
  * @param {string[]} words
  * @return {number[]}
  */
-var findSubstring = function(s, words) {
+const findSubstring = function(s, words) {
     // What's the invariant ?. The invariant is that for each window(string) we should have any valid permutation of the words array
     // Is the window fixed or expanding ?. The window is always fixed with all the elements within the words array in any order
     // What's the window start ? 0 which will be incremented as we move through the string s
     // What's the window end ? length of the entire words array.
     let windowStart = 0;
-    let windowSize = words.reduce((acc, curr)=>{
-      return acc + curr.length
-    }, 0)
     let size = words[0].length
+    let windowSize = words.length * size
     let answer = []
-
     for(let i = 0; i<s.length; i++){
         let windowState = s.substring(windowStart, i+windowSize)
-        if(windowState.length < windowSize) return answer
+        if(windowState.length < windowSize) break;
         let newWindowStateArray = []
         for(let j = 0; j<windowState.length; j+=size){
             newWindowStateArray.push(windowState.substring(j, j+size))
         }
-
-        let isVariantValid = words.every(word=> newWindowStateArray.includes(word))
-        if(isVariantValid) {
+        // validating the window based of the variant
+        let isWindowStateValid = words.toSorted((a, b) => a.localeCompare(b)).join(",") === newWindowStateArray.toSorted((a,b)=> a.localeCompare(b)).join(",")
+        if(isWindowStateValid) {
             answer.push(windowStart)
         }
         windowStart++
@@ -85,4 +82,4 @@ var findSubstring = function(s, words) {
 
 };
 
-console.log(findSubstring("barfoothefoobarman", ["foo","bar"]))
+console.log(findSubstring("wordgoodgoodgoodbestword", ["word","good","best","word"]))
