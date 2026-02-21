@@ -60,16 +60,16 @@ const findSubstring = function(s, words) {
     // What's the window start ? 0 which will be incremented as we move through the string s
     // What's the window end ? length of the entire words array.
     let windowStart = 0;
-    let size = words[0].length
-    let windowSize = words.length * size
+    let wordSize = words[0].length
+    let windowSize = words.length * wordSize
     let answer = []
     const sortedWords = words.toSorted((a, b) => a.localeCompare(b)).join(",")
     for(let i = 0; i<s.length; i++){
         let windowState = s.substring(windowStart, i+windowSize)
         if(windowState.length < windowSize) break;
         let newWindowStateArray = []
-        for(let j = 0; j<windowState.length; j+=size){
-            newWindowStateArray.push(windowState.substring(j, j+size))
+        for(let j = 0; j<windowState.length; j+=wordSize){
+            newWindowStateArray.push(windowState.substring(j, j+wordSize))
         }
         // validating the window based of the variant
         let sortedWindowState =  newWindowStateArray.toSorted((a,b)=> a.localeCompare(b)).join(",")
@@ -83,4 +83,4 @@ const findSubstring = function(s, words) {
 
 };
 
-console.log(findSubstring("wordgoodgoodgoodbestword", ["word","good","best","word"]))
+console.log(findSubstring("barfoothefoobarman", ["foo","bar"]))
