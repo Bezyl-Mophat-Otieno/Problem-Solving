@@ -69,10 +69,7 @@ var findSubstring = function(s, words) {
     for(let i = 0; i<s.length; i++){
         let windowState = s.substring(windowStart, i+windowSize)
         if(windowState.length < windowSize) return answer
-        let newWindowStateArray = []
-        for(let j=0; j<windowState.length;j+=size){
-            newWindowStateArray.push(windowState.substring(j, j+size))
-        }
+        let newWindowStateArray = windowState.match(new RegExp(`.{1,${size}}`, 'g')) || []
         let isVariantValid = words.every(word=> newWindowStateArray.includes(word))
         if(isVariantValid) {
             answer.push(windowStart)
@@ -84,4 +81,4 @@ var findSubstring = function(s, words) {
 
 };
 
-console.log(findSubstring("wordgoodgoodgoodbestword", ["word","good","best","word"]))
+console.log(findSubstring("barfoothefoobarman", ["foo","bar"]))
